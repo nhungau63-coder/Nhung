@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Video Editor Portfolio</title>
+  <meta name="description" content="Portfolio video editor - showreel, selected work, services and contact." />
+  <style>
+    :root{
+      --bg:#090909;
+      --card:#121212;
+      --card2:#171717;
+      --text:#f5f5f5;
+      --muted:#a3a3a3;
+      --line:#262626;
+      --accent:#ffffff;
+      --radius:22px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 15% -10%, rgba(255,255,255,.09), transparent 32%),
+        var(--bg);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+    .wrap{max-width:var(--max);margin:auto;padding:0 20px}
+    nav{
+      position:sticky;top:0;z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(9,9,9,.76);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{
+      height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{font-weight:800;letter-spacing:-.03em}
+    .nav-links{display:flex;gap:18px;color:var(--muted);font-size:14px}
+    .nav-links a:hover{color:var(--text)}
+    .hero{
+      min-height:72vh;display:grid;align-items:center;padding:76px 0 54px;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      color:#d4d4d4;font-size:13px;text-transform:uppercase;letter-spacing:.16em;
+      margin-bottom:18px;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:#7CFFB2;box-shadow:0 0 20px #7CFFB2}
+    h1{
+      font-size:clamp(48px,10vw,112px);
+      line-height:.9;letter-spacing:-.065em;margin:0;
+      max-width:1000px;
+    }
+    .hero p{
+      max-width:650px;color:var(--muted);
+      font-size:clamp(17px,2.5vw,22px);margin:28px 0 0;
+    }
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{
+      border:1px solid var(--line);padding:13px 18px;border-radius:999px;
+      display:inline-flex;align-items:center;gap:9px;font-weight:650;
+      transition:.2s ease;background:var(--card);
+    }
+    .btn.primary{background:#fff;color:#000;border-color:#fff}
+    .btn:hover{transform:translateY(-2px)}
+    section{padding:64px 0}
+    .section-head{
+      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:24px
+    }
+    .section-head h2{font-size:clamp(30px,5vw,54px);letter-spacing:-.045em;margin:0}
+    .section-head p{color:var(--muted);max-width:520px;margin:0}
+    .showreel{
+      border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#000;
+      box-shadow:0 20px 80px rgba(0,0,0,.35);
+    }
+    .media{aspect-ratio:16/9;background:#000;position:relative}
+    .media iframe,.media video{width:100%;height:100%;border:0;display:block}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{
+      border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);
+      transition:.25s ease;
+    }
+    .card:hover{transform:translateY(-4px);border-color:#3b3b3b}
+    .card-body{padding:18px}
+    .card-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+    .card h3{margin:0;font-size:22px;letter-spacing:-.025em}
+    .tag{
+      flex:none;border:1px solid var(--line);border-radius:999px;padding:5px 9px;
+      color:#c7c7c7;font-size:12px
+    }
+    .card p{margin:8px 0 0;color:var(--muted);font-size:14px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .service{
+      border:1px solid var(--line);background:var(--card);border-radius:18px;padding:22px;
+      min-height:160px
+    }
+    .service .num{color:#707070;font-size:13px}
+    .service h3{font-size:20px;margin:34px 0 5px}
+    .service p{color:var(--muted);margin:0;font-size:14px}
+    .contact{
+      border:1px solid var(--line);border-radius:var(--radius);
+      padding:clamp(26px,5vw,56px);background:linear-gradient(145deg,#151515,#0d0d0d)
+    }
+    .contact h2{font-size:clamp(36px,7vw,76px);line-height:.98;letter-spacing:-.05em;margin:0}
+    .contact p{color:var(--muted);max-width:640px;font-size:18px}
+    footer{padding:32px 0 50px;color:#777;font-size:13px}
+    .empty{
+      min-height:100%;display:grid;place-items:center;text-align:center;padding:30px;color:#888;
+      background:linear-gradient(135deg,#111,#080808)
+    }
+    .empty strong{color:#ddd;display:block;margin-bottom:6px}
+    @media(max-width:760px){
+      .nav-links{display:none}
+      .hero{min-height:auto;padding:64px 0 34px}
+      .grid,.services{grid-template-columns:1fr}
+      section{padding:46px 0}
+      .section-head{align-items:start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="#" id="navName">YOUR NAME</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="wrap">
+        <div class="eyebrow"><span class="dot"></span><span id="availability">Available for freelance work</span></div>
+        <h1 id="heroTitle">Video editor crafting clean, engaging stories.</h1>
+        <p id="heroText">I edit documentary, finance, social and YouTube content with strong pacing, clean motion graphics and story-first visuals.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">View my work ↓</a>
+          <a class="btn" id="contactTop" href="mailto:you@example.com">Contact me ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Showreel</h2>
+          <p>Đặt video mạnh nhất của m ở đây. Có thể dùng YouTube, Vimeo, Google Drive hoặc link MP4 trực tiếp.</p>
+        </div>
+        <div class="showreel">
+          <div class="media" id="showreelMedia"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <p>Mỗi project chỉ cần sửa title, category, description và link video ở phần CONFIG phía cuối file.</p>
+        </div>
+        <div class="grid" id="projectsGrid"></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What I do</h2>
+          <p>Mô tả ngắn những kỹ năng khách hàng Upwork thường cần.</p>
+        </div>
+        <div class="services" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <h2>Have a project?<br>Let’s make it sharp.</h2>
+          <p id="contactText">Available for freelance video editing, YouTube editing, documentary-style videos and motion graphics.</p>
+          <div class="cta-row">
+            <a class="btn primary" id="emailBtn" href="mailto:you@example.com">Email me ↗</a>
+            <a class="btn" id="upworkBtn" href="#" target="_blank" rel="noopener">Upwork profile ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> <span id="footerName">YOUR NAME</span>. Video Editor Portfolio.</div>
+  </footer>
+
+<script>
+/* ============================================================
+   CHỈ CẦN SỬA PHẦN CONFIG NÀY
+   ============================================================ */
+
+const CONFIG = {
+  name: "YOUR NAME",
+  availability: "Available for freelance work",
+
+  heroTitle: "Video editor crafting clean, engaging stories.",
+  heroText: "I edit documentary, finance, social and YouTube content with strong pacing, clean motion graphics and story-first visuals.",
+
+  email: "you@example.com",
+  upwork: "https://www.upwork.com/",
+
+  showreel: "https://drive.google.com/file/d/1I2qg78Tzrmh--hQs-E4G3Ug2yEWJMlIC/view?usp=sharing",
+
+  services: [
+    {
+      title: "YouTube Editing",
+      text: "Long-form edits, pacing, B-roll, subtitles, sound design and retention-focused structure."
+    },
+    {
+      title: "Motion Graphics",
+      text: "Clean 2D motion graphics, text animation, infographics, timelines and finance visuals."
+    },
+    {
+      title: "Documentary / Storytelling",
+      text: "Research-heavy edits with archival visuals, maps, photos, voiceover and cinematic pacing."
+    }
+  ],
+
+  projects: [
+    {
+      title: "Selected Work 01",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1I2qg78Tzrmh--hQs-E4G3Ug2yEWJMlIC/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 02",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1lgstKTYTdAFlyvqh3Kt_N6ZhAe8ajjUw/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 03",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1VRSApHOEophpOy8OvWRpohzjh-BcqZx0/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 04",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1aMghrovjJYdI4M4I9ez-ipeweRywW25Z/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 05",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1JI_4-Cu9N4D3tLjXcKfpbo3JV01ZVsPR/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 06",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/176wMrXIumOxIGpu-93CaTVFE6p7r589-/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 07",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1opuTz011oXJ9cIEc-PoL_MamWBBiUFo4/view?usp=sharing"
+    },
+    {
+      title: "Selected Work 08",
+      category: "Video Editing",
+      description: "Selected editing project — pacing, visual storytelling, B-roll and polished post-production.",
+      video: "https://drive.google.com/file/d/1VfbhzWHZGo87AfXZZp0qZbNVl2GAS7_m/view?usp=sharing"
+    }
+  ]
+};
+
+/* ============================================================
+   KHÔNG CẦN SỬA PHẦN BÊN DƯỚI
+   ============================================================ */
+
+function getYouTubeId(url){
+  try{
+    const u = new URL(url);
+    if(u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+    if(u.searchParams.get("v")) return u.searchParams.get("v");
+    const m = u.pathname.match(/\/(embed|shorts)\/([^/?]+)/);
+    return m ? m[2] : null;
+  }catch(e){ return null; }
+}
+
+function getDriveId(url){
+  if(!url) return null;
+  const patterns = [
+    /\/file\/d\/([^/]+)/,
+    /[?&]id=([^&]+)/,
+    /\/d\/([^/]+)/
+  ];
+  for(const p of patterns){
+    const m = url.match(p);
+    if(m) return m[1];
+  }
+  return null;
+}
+
+function renderMedia(url){
+  const safe = (url || "").trim();
+
+  if(!safe || safe.startsWith("DÁN_")){
+    return `<div class="empty"><div><strong>Chưa có video</strong>Dán link video trong phần CONFIG.</div></div>`;
+  }
+
+  const yt = getYouTubeId(safe);
+  if(yt){
+    return `<iframe src="https://www.youtube.com/embed/${yt}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+  }
+
+  if(safe.includes("vimeo.com")){
+    const m = safe.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if(m) return `<iframe src="https://player.vimeo.com/video/${m[1]}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  }
+
+  if(safe.includes("drive.google.com")){
+    const id = getDriveId(safe);
+    if(id) return `<iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe>`;
+  }
+
+  if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(safe)){
+    return `<video controls playsinline preload="metadata" src="${safe}"></video>`;
+  }
+
+  return `<div class="empty"><div><strong>Link chưa được nhận diện</strong>Hãy dùng YouTube, Vimeo, Google Drive hoặc link MP4 trực tiếp.</div></div>`;
+}
+
+function init(){
+  document.title = `${CONFIG.name} — Video Editor`;
+  document.getElementById("navName").textContent = CONFIG.name;
+  document.getElementById("footerName").textContent = CONFIG.name;
+  document.getElementById("availability").textContent = CONFIG.availability;
+  document.getElementById("heroTitle").textContent = CONFIG.heroTitle;
+  document.getElementById("heroText").textContent = CONFIG.heroText;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const emailHref = `mailto:${CONFIG.email}`;
+  document.getElementById("contactTop").href = emailHref;
+  document.getElementById("emailBtn").href = emailHref;
+  document.getElementById("emailBtn").textContent = CONFIG.email + " ↗";
+  document.getElementById("upworkBtn").href = CONFIG.upwork;
+
+  document.getElementById("showreelMedia").innerHTML = renderMedia(CONFIG.showreel);
+
+  const projectsGrid = document.getElementById("projectsGrid");
+  projectsGrid.innerHTML = CONFIG.projects.map(p => `
+    <article class="card">
+      <div class="media">${renderMedia(p.video)}</div>
+      <div class="card-body">
+        <div class="card-top">
+          <div>
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+          </div>
+          <span class="tag">${p.category}</span>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  const servicesGrid = document.getElementById("servicesGrid");
+  servicesGrid.innerHTML = CONFIG.services.map((s,i) => `
+    <div class="service">
+      <div class="num">0${i+1}</div>
+      <h3>${s.title}</h3>
+      <p>${s.text}</p>
+    </div>
+  `).join("");
+}
+
+init();
+</script>
+</body>
+</html>
